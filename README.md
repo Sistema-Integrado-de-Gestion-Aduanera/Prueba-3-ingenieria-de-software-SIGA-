@@ -5,4 +5,6 @@ Este repositorio sera usado para subir archivos de nuestro proyecto y sus versio
 
 
 V 0.1: Prototipo hecho a mano en cuaderno para pasarlo a codigo a figma
+
+
 V 1.0: Codigo Figma de SIGA
