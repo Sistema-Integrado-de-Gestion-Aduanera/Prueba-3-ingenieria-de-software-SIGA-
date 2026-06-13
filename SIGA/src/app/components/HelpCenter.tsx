@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { HelpCircle, Mail, Phone, KeyRound, ChevronDown, ChevronUp, ArrowLeft, Send, CheckCircle } from "lucide-react";
 import { SigaLogo } from "./SigaLogo";
+import { FormField } from "./FormField";
+import { validateEmail, validateName } from "../utils/validators";
 
 interface HelpCenterProps {
   onNavigate: (page: string) => void;
@@ -20,12 +22,30 @@ export function HelpCenter({ onNavigate, userLoggedIn = false }: HelpCenterProps
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [tab, setTab] = useState<"faq" | "contact" | "recovery">("faq");
   const [contactForm, setContactForm] = useState({ nombre: "", email: "", asunto: "", mensaje: "" });
+  const [contactErrors, setContactErrors] = useState<{ nombre?: string; email?: string; asunto?: string }>({});
   const [recoveryEmail, setRecoveryEmail] = useState("");
+  const [recoveryEmailError, setRecoveryEmailError] = useState("");
   const [sent, setSent] = useState(false);
   const [recovered, setRecovered] = useState(false);
 
+  const handleContactField = useCallback(
+    (field: keyof typeof contactForm) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setContactForm(prev => ({ ...prev, [field]: e.target.value }));
+      setContactErrors(prev => ({ ...prev, [field]: undefined }));
+    },
+    []
+  );
+
   const handleContact = (e: React.FormEvent) => {
     e.preventDefault();
+    const errs: typeof contactErrors = {};
+    const nameErr = validateName(contactForm.nombre);
+    if (nameErr) errs.nombre = nameErr;
+    const emailErr = validateEmail(contactForm.email);
+    if (emailErr) errs.email = emailErr;
+    const asuntoErr = validateName(contactForm.asunto);
+    if (asuntoErr) errs.asunto = asuntoErr;
+    if (Object.keys(errs).length) { setContactErrors(errs); return; }
     setSent(true);
   };
 
@@ -112,25 +132,42 @@ export function HelpCenter({ onNavigate, userLoggedIn = false }: HelpCenterProps
                 <button onClick={() => setSent(false)} className="text-primary text-sm hover:underline">Enviar otra consulta</button>
               </div>
             ) : (
-              <form onSubmit={handleContact} className="bg-card border border-border rounded-xl p-5 space-y-4">
+              <form onSubmit={handleContact} noValidate className="bg-card border border-border rounded-xl p-5 space-y-4">
                 <h3 className="text-sm text-foreground" style={{fontFamily:"'Roboto Condensed',sans-serif"}}>Formulario de Contacto</h3>
-                {[
-                  { key: "nombre", label: "Nombre", type: "text", ph: "Juan Pérez" },
-                  { key: "email", label: "Correo Electrónico", type: "email", ph: "juan@ejemplo.cl" },
-                  { key: "asunto", label: "Asunto", type: "text", ph: "Consulta sobre trámite" },
-                ].map(({ key, label, type, ph }) => (
-                  <div key={key}>
-                    <label className="block text-sm text-foreground mb-1">{label}</label>
-                    <input type={type} value={contactForm[key as keyof typeof contactForm]} onChange={e => setContactForm({ ...contactForm, [key]: e.target.value })}
-                      placeholder={ph} required
-                      className="w-full px-3 py-2 rounded-md border border-border text-sm bg-input-background outline-none focus:ring-2 focus:ring-ring" />
-                  </div>
-                ))}
+                <FormField
+                  label="Nombre"
+                  placeholder="Juan Pérez"
+                  value={contactForm.nombre}
+                  onChange={handleContactField("nombre")}
+                  error={contactErrors.nombre}
+                  autoComplete="name"
+                />
+                <FormField
+                  label="Correo Electrónico"
+                  type="email"
+                  placeholder="juan@ejemplo.cl"
+                  value={contactForm.email}
+                  onChange={handleContactField("email")}
+                  error={contactErrors.email}
+                  autoComplete="email"
+                  inputMode="email"
+                />
+                <FormField
+                  label="Asunto"
+                  placeholder="Consulta sobre trámite"
+                  value={contactForm.asunto}
+                  onChange={handleContactField("asunto")}
+                  error={contactErrors.asunto}
+                />
                 <div>
                   <label className="block text-sm text-foreground mb-1">Mensaje</label>
-                  <textarea value={contactForm.mensaje} onChange={e => setContactForm({ ...contactForm, mensaje: e.target.value })}
-                    placeholder="Describa su consulta o problema..." required rows={4}
-                    className="w-full px-3 py-2 rounded-md border border-border text-sm bg-input-background outline-none focus:ring-2 focus:ring-ring resize-none" />
+                  <textarea
+                    value={contactForm.mensaje}
+                    onChange={handleContactField("mensaje")}
+                    placeholder="Describa su consulta o problema..."
+                    rows={4}
+                    className="w-full px-3 py-2 rounded-md border border-border text-sm bg-input-background outline-none focus:ring-2 focus:ring-ring resize-none"
+                  />
                 </div>
                 <button type="submit" className="flex items-center gap-2 bg-primary hover:bg-blue-900 text-white px-5 py-2 rounded-md text-sm transition-colors">
                   <Send size={14} /> Enviar Consulta
@@ -154,13 +191,27 @@ export function HelpCenter({ onNavigate, userLoggedIn = false }: HelpCenterProps
                 <button onClick={() => { setRecovered(false); setRecoveryEmail(""); }} className="text-primary text-sm hover:underline">Intentar con otro correo</button>
               </div>
             ) : (
-              <form onSubmit={e => { e.preventDefault(); setRecovered(true); }} className="flex flex-col gap-4">
-                <div>
-                  <label className="block text-sm text-foreground mb-1">Correo Electrónico</label>
-                  <input type="email" value={recoveryEmail} onChange={e => setRecoveryEmail(e.target.value)}
-                    placeholder="juan@ejemplo.cl" required
-                    className="w-full px-3 py-2 rounded-md border border-border text-sm bg-input-background outline-none focus:ring-2 focus:ring-ring" />
-                </div>
+              <form
+                onSubmit={e => {
+                  e.preventDefault();
+                  const err = validateEmail(recoveryEmail);
+                  if (err) { setRecoveryEmailError(err); return; }
+                  setRecoveryEmailError("");
+                  setRecovered(true);
+                }}
+                noValidate
+                className="flex flex-col gap-4"
+              >
+                <FormField
+                  label="Correo Electrónico"
+                  type="email"
+                  placeholder="juan@ejemplo.cl"
+                  value={recoveryEmail}
+                  onChange={e => { setRecoveryEmail(e.target.value); setRecoveryEmailError(""); }}
+                  error={recoveryEmailError}
+                  autoComplete="email"
+                  inputMode="email"
+                />
                 <button type="submit" className="flex items-center gap-2 bg-primary hover:bg-blue-900 text-white px-5 py-2 rounded-md text-sm transition-colors w-fit">
                   <KeyRound size={14} /> Enviar Código de Recuperación
                 </button>

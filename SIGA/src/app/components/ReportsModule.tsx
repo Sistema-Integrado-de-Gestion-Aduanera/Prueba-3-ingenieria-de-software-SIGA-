@@ -55,12 +55,12 @@ export function ReportsModule({ onNavigate, onLogout }: ReportsModuleProps) {
         <div className="bg-card border border-border rounded-xl p-5 mb-6 grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
           <div>
             <label className="block text-sm text-foreground mb-1 flex items-center gap-1"><Calendar size={13} /> Desde</label>
-            <input type="date" value={dateFrom} onChange={e => setDateFrom(e.target.value)}
+            <input type="date" min="1900-01-01" max="2050-12-31" value={dateFrom} onChange={e => setDateFrom(e.target.value)}
               className="w-full px-3 py-2 border border-border rounded-md text-sm bg-input-background outline-none focus:ring-2 focus:ring-ring" />
           </div>
           <div>
             <label className="block text-sm text-foreground mb-1 flex items-center gap-1"><Calendar size={13} /> Hasta</label>
-            <input type="date" value={dateTo} onChange={e => setDateTo(e.target.value)}
+            <input type="date" min="1900-01-01" max="2050-12-31" value={dateTo} onChange={e => setDateTo(e.target.value)}
               className="w-full px-3 py-2 border border-border rounded-md text-sm bg-input-background outline-none focus:ring-2 focus:ring-ring" />
           </div>
           <div>
