@@ -1,0 +1,133 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="2MhcjZ7NUn0LTYCaFLmp">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=#e8f5e9;strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Nodos Externos - Sistemas Integrados" vertex="1">
+          <mxGeometry height="222" width="837" x="27" y="828" as="geometry" />
+        </mxCell>
+        <mxCell id="3" parent="1" style="whiteSpace=wrap;strokeWidth=2;verticalAlign=top;fillColor=#fff3e0;strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Servidor de Base de Datos" vertex="1">
+          <mxGeometry height="172" width="650" x="899" y="853" as="geometry" />
+        </mxCell>
+        <mxCell id="4" parent="3" style="whiteSpace=wrap;strokeWidth=2;fillColor=#ffe0b2;strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Base de Datos Relacional&#xa;Tránsitos, Credenciales, Logs" vertex="1">
+          <mxGeometry height="102" width="260" x="46" y="43" as="geometry" />
+        </mxCell>
+        <mxCell id="5" parent="3" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Registros de Auditoría&#xa;Institucional" vertex="1">
+          <mxGeometry height="78" width="240" x="381" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="6" edge="1" parent="3" source="4" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="5" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7" parent="1" style="whiteSpace=wrap;strokeWidth=2;verticalAlign=top;fillColor=#f3e5f5;strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Servidor de Aplicaciones - Nube/Central&#xa;Amazon Linux t2.medium" vertex="1">
+          <mxGeometry height="148" width="1163" x="8" y="558" as="geometry" />
+        </mxCell>
+        <mxCell id="8" parent="7" style="whiteSpace=wrap;strokeWidth=2;fillColor=#ce93d8;strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="API Autenticación" vertex="1">
+          <mxGeometry height="54" width="212" x="313" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="9" parent="7" style="whiteSpace=wrap;strokeWidth=2;fillColor=#ce93d8;strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Procesador de Datos" vertex="1">
+          <mxGeometry height="54" width="232" x="600" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="10" parent="7" style="whiteSpace=wrap;strokeWidth=2;fillColor=#ce93d8;strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Módulo de Reportes" vertex="1">
+          <mxGeometry height="54" width="227" x="907" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="11" parent="7" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Security Groups&#xa;Puerto 80, 443, 22" vertex="1">
+          <mxGeometry height="78" width="192" x="46" y="43" as="geometry" />
+        </mxCell>
+        <mxCell id="12" edge="1" parent="7" source="8" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="9" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="13" edge="1" parent="7" source="9" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="10" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="14" edge="1" parent="7" source="11" style="curved=1;dashed=1;dashPattern=2 3;startArrow=none;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="8" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="15" parent="1" style="whiteSpace=wrap;strokeWidth=2;verticalAlign=top;fillColor=#e1f5ff;strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Terminal de Operación - Caseta Fronteriza" vertex="1">
+          <mxGeometry height="428" width="609" x="285" y="8" as="geometry" />
+        </mxCell>
+        <mxCell id="16" parent="15" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Escáner Óptico/Lector QR&#xa;Cédulas y Pasaportes" vertex="1">
+          <mxGeometry height="102" width="260" x="46" y="171" as="geometry" />
+        </mxCell>
+        <mxCell id="17" parent="15" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);fontStyle=0" value="Navegador Web&#xa;Chrome/Microsoft Edge" vertex="1">
+          <mxGeometry height="78" width="229" x="61" y="43" as="geometry" />
+        </mxCell>
+        <mxCell id="18" parent="15" style="whiteSpace=wrap;strokeWidth=2;fillColor=#bbdefb;strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="SIGA - Interfaz Web" vertex="1">
+          <mxGeometry height="54" width="199" x="381" y="195" as="geometry" />
+        </mxCell>
+        <mxCell id="19" parent="15" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Impresora&#xa;Formularios Vehículos" vertex="1">
+          <mxGeometry height="78" width="216" x="68" y="323" as="geometry" />
+        </mxCell>
+        <mxCell id="20" edge="1" parent="15" source="17" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.5;entryX=0.36;entryY=0;" target="18" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="343" y="82" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="21" edge="1" parent="15" source="16" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="18" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="22" edge="1" parent="15" source="19" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.5;entryX=0.36;entryY=1;" target="18" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="343" y="362" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="23" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=#c8e6c9;strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="PDI Central&#xa;Validación Antecedentes" vertex="1">
+          <mxGeometry height="78" width="235" x="62" y="900" as="geometry" />
+        </mxCell>
+        <mxCell id="24" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=#c8e6c9;strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="SAG Central&#xa;Declaraciones Juradas" vertex="1">
+          <mxGeometry height="78" width="219" x="347" y="900" as="geometry" />
+        </mxCell>
+        <mxCell id="25" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=#c8e6c9;strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Aduana Argentina&#xa;Intercambio de Datos" vertex="1">
+          <mxGeometry height="78" width="213" x="616" y="900" as="geometry" />
+        </mxCell>
+        <mxCell id="26" edge="1" parent="1" source="15" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="7" value="HTTPS/SSL-TLS&#xa;VPN Institucional&#xa;3-5 seg">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="27" edge="1" parent="1" source="7" style="curved=1;startArrow=none;endArrow=block;exitX=0.8;exitY=1;entryX=0.5;entryY=0;" target="3" value="HTTPS/SSL-TLS&#xa;Enlace Dedicado">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1224" y="767" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="28" edge="1" parent="1" source="7" style="curved=1;startArrow=none;endArrow=block;exitX=0.31;exitY=1;entryX=0.5;entryY=0;" target="23" value="REST API&#xa;HTTPS/SSL-TLS">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="180" y="767" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="29" edge="1" parent="1" source="7" style="curved=1;startArrow=none;endArrow=block;exitX=0.44;exitY=1;entryX=0.5;entryY=0;" target="24" value="SOAP/REST API&#xa;HTTPS/SSL-TLS">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="456" y="767" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="30" edge="1" parent="1" source="7" style="curved=1;startArrow=none;endArrow=block;exitX=0.56;exitY=1;entryX=0.5;entryY=0;" target="25" value="REST API&#xa;HTTPS/SSL-TLS&#xa;Acuerdo Chileno-Argentino">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="722" y="767" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
